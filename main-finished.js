@@ -33,8 +33,8 @@ class Ball {
     ctx.beginPath();
     ctx.fillStyle = this.color;
     
-    // Dibujamos el símbolo de PlayStation
-    ctx.font = `${this.size * 2}px Arial`;
+    // Aumentamos el multiplicador del tamaño de la fuente
+    ctx.font = `${this.size * 3}px Arial`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(this.symbol, this.x, this.y);
@@ -81,7 +81,7 @@ const balls = [];
 // Eliminamos el while loop inicial y agregamos un event listener para Control+Y
 document.addEventListener('keydown', (event) => {
   if (event.ctrlKey && event.key === 'y') {
-    const size = random(10, 20);
+    const size = random(20, 40); // Aumentamos el rango del tamaño
     const ball = new Ball(
       random(0 + size, width - size),
       random(0 + size, height - size),
@@ -94,11 +94,18 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-// Agregamos un contador en la esquina superior izquierda
+// Modificamos la función drawCounter para centrar el texto y agregar instrucciones
 function drawCounter() {
   ctx.fillStyle = 'white';
   ctx.font = '24px Arial';
-  ctx.fillText(`Símbolos: ${balls.length}`, 10, 30);
+  ctx.textAlign = 'center';
+  
+  // Contador centrado en la parte superior
+  ctx.fillText(`Símbolos: ${balls.length}`, width / 2, 30);
+  
+  // Mensaje de instrucciones
+  ctx.font = '20px Arial';
+  ctx.fillText('Presiona Control + Y para agregar símbolos', width / 2, 60);
 }
 
 // Modificamos la función loop para incluir el contador
